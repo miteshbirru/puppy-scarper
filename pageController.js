@@ -10,7 +10,6 @@ async function scrapeAll(browserInstance, url) {
 		return text;
 	} catch (err) {
 		console.log("Could not resolve the browser instance => ", err);
-		await browser.close();
 	}
 }
 
