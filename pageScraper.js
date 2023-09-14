@@ -17,7 +17,9 @@ const scraperObject = {
 			// 	await html.getProperty("textContent")
 			// ).jsonValue();
 
-			const text = await page.evaluate(() => document.children[0].outerHTML);
+			const text = await page.evaluate(
+				() => document.children[0].outerHTML
+			);
 
 			return text;
 		} catch (err) {
@@ -29,18 +31,27 @@ const scraperObject = {
 async function autoScroll(page) {
 	await page.evaluate(async () => {
 		await new Promise((resolve) => {
-			var totalHeight = 0;
-			var distance = 100;
-			var timer = setInterval(() => {
-				var scrollHeight = document.body.scrollHeight;
-				window.scrollBy(0, distance);
-				totalHeight += distance;
+			// var totalHeight = 0;
+			// var distance = 100;
+			// var timer = setInterval(() => {
+			// 	var scrollHeight = document.body.scrollHeight;
+			// 	window.scrollBy(0, distance);
+			// 	totalHeight += distance;
+			// 	if (totalHeight >= scrollHeight - window.innerHeight) {
+			// 		clearInterval(timer);
+			// 		resolve();
+			// 	}
+			// }, 10);
 
-				if (totalHeight >= scrollHeight - window.innerHeight) {
+			let maxScrolls = 4;
+			var timer = setInterval(() => {
+				window.scrollBy(0, 100);
+				maxScrolls--;
+				if (maxScrolls) {
 					clearInterval(timer);
 					resolve();
 				}
-			}, 10);
+			}, 100);
 		});
 	});
 }
