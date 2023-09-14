@@ -7,6 +7,7 @@ async function startBrowser() {
 		browser = await puppeteer.launch({
 			headless: true,
 			ignoreHTTPSErrors: true,
+			arguments: ["--enable-gpu"],
 		});
 	} catch (error) {
 		console.log("Could not create a browser instance => : ", error);
